@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 
-
 .lora-uniquifier {
     font-family: "Lora", serif;
     font-optical-sizing: auto;
@@ -47,10 +46,10 @@ body {
 
 .cont {
   display: flex;
-  /* justify-content: center; */
   margin-top: 50px;
   gap: 10px;
 }
+
 p{
     font-size: 18px;
     font-weight: bold;
@@ -65,7 +64,7 @@ p{
 }
 .no {
     color: rgb(165, 154, 154);
-    font-size: 18;    /* font-family:'Times New Roman', Times, serif; */
+    font-size: 18;    
     font-weight: normal;
     text-align: center;
     margin-top: 70px;
@@ -79,8 +78,6 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    /* margin-left:  */
-    
 }
 
 
