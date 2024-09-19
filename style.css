@@ -23,8 +23,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #1c1c1c;
-    color: #fad78d;
-
+    color: #e4c86f
 }
 
 .todo-container {
@@ -32,22 +31,22 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    width: 50%;
-    height: 50%;
+    width: 60%;
+    max-height: 70%;
     max-width: 800px;
     font-family: "Poppins";
 }
 
 .todo-container h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     font-size: 25px;
 }
 
 .cont {
   display: flex;
-  margin-top: 50px;
-  gap: 10px;
+  gap: 60px;
+  /* justify-content: space-between; */
 }
 
 p{
@@ -72,8 +71,8 @@ p{
 
 button {
     padding: 10px;
-    background-color: #e0ad3d;
-    color: rgb(34, 43, 29);
+    background-color: #e4c86f;
+    color: rgb(20, 22, 21);
     border: none; 
     border-radius: 5px;
     cursor: pointer;
@@ -86,7 +85,7 @@ button:hover {
 }
 
 input[type="text"] {
-    width: 150%; 
+    width: 62%; 
     padding: 10px;
     border: 2px solid #555555; 
     border-radius: 8px; 
@@ -94,14 +93,55 @@ input[type="text"] {
     font-size: 15px; 
     box-sizing: border-box; 
     font-family: 'Arial', sans-serif;
-    color: #e4dcb9;
+    color: #eeede9;
+    margin-bottom: 60px;
+    margin-left: 96px;
+    
 }
 
 input[type="text"]:focus {
     border-color:  #b3b451; 
     outline: none;
+    background-color: #555555;
 }
 #edit-btn {
     display: none;
   }
   
+.output{
+    display: flex;
+    margin-bottom: 20px;
+    justify-content:space-between;
+    margin-left: 70px;
+    width: 90%;  
+    /* ba */
+}
+
+.output p{
+    border: 2px solid #575653;
+    
+    width: 70%;
+    padding-left: 30px;
+    height: 35px;
+    border-radius: 8px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    font-size: 15px;
+    padding-top: 5px;
+    color: #eeede9;
+    margin-right: 30px;
+
+}
+.fa-feather-pointed{
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.icon {
+    margin-left: 10px; /* Adjust the value to control the space */
+}
+.btns{
+    display: flex;
+    gap: 20px;
+    height: 35px;
+
+    /* margin-right: 20px; */
+}

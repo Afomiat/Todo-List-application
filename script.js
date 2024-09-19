@@ -21,17 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const taskElement = document.createElement('div');
         taskElement.classList.add('task-item');
         taskElement.innerHTML = `
-            <div>
+            <div class = "output">
+                <i class="fa-duotone fa-solid fa-feather-pointed"></i>
                 <p>${task}</p>
-                <button class="edit-btn" onclick="editTask('${task.replace(/'/g, "\\'")}')">
-                    <i class="fa-solid fa-edit"></i>
-                </button>
-                <button class="delete-btn" onclick="deleteTask('${task.replace(/'/g, "\\'")}')">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-                <button class="done-btn" onclick="doneTask('${task.replace(/'/g, "\\'")}')">
-                    <i class="fa-solid fa-check"></i>
-                </button>
+                <div class = "btns">
+                    <button class="edit-btn" onclick="editTask('${task.replace(/'/g, "\\'")}')">
+                        <i class="fa-solid fa-edit"></i>
+                    </button>
+                    <button class="delete-btn" onclick="deleteTask('${task.replace(/'/g, "\\'")}')">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                    <button class="done-btn" onclick="doneTask('${task.replace(/'/g, "\\'")}')">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                <div/>
             <div/>
         `;
         container.appendChild(taskElement);
@@ -98,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.editTask = function(task) {
-        taskInput.value = task;
+        taskInput.value = task.replace(/<\/?s>/g, '');
         editingItem = task;
         toggleButtons(true);
     };
