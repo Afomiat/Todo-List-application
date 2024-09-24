@@ -1,6 +1,5 @@
 "use strict";
 let editingItem = null;
-// Function to render tasks
 function renderTasks(tasks) {
     const container = document.getElementById('list-add');
     const empty = document.getElementById('empty');
@@ -24,7 +23,7 @@ window.editTask = function (taskId) {
     if (task) {
         const taskInput = document.getElementById('text-inp');
         if (taskInput) {
-            taskInput.value = task.task;
+            taskInput.value = task.task.replace(/<\/?s>/g, '');
         }
         editingItem = taskId;
         toggleButtons(true);
@@ -34,11 +33,23 @@ window.editTask = function (taskId) {
 window.deleteTask = function (taskId) {
     console.log('Deleting task:', taskId);
     let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-    tasks = tasks.filter(task => task.id !== taskId); // Remove the task from the list
+    tasks = tasks.filter(task => task.id !== taskId);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     renderTasks(tasks);
 };
-// Function to toggle buttons visibility
+window.doneTask = function (taskId) {
+    let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    tasks = tasks.map(task => {
+        if (task.id === taskId) {
+            const isDone = task.task.startsWith('<s>') && task.task.endsWith('</s>');
+            const updatedTask = isDone ? task.task.replace(/<\/?s>/g, '') : `<s>${task.task}</s>`;
+            return Object.assign(Object.assign({}, task), { task: updatedTask });
+        }
+        return task;
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks(tasks);
+};
 function toggleButtons(isEditing) {
     const addButton = document.getElementById('add-btn');
     const updateButton = document.getElementById('edit-btn');
@@ -73,7 +84,6 @@ function addTask(task) {
     const newTask = {
         id: Date.now(),
         task: task,
-        isCompleted: false,
     };
     tasks.push(newTask);
     localStorage.setItem('tasks', JSON.stringify(tasks));

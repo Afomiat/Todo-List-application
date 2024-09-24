@@ -1,12 +1,12 @@
 interface TodoItem {
     id: number;
     task: string;
-    isCompleted: boolean;
+    
 }
 
 let editingItem: number | null = null;
 
-// Function to render tasks
+
 function renderTasks(tasks: TodoItem[]) {
     const container = document.getElementById('list-add') as HTMLDivElement | null;
     const empty = document.getElementById('empty') as HTMLDivElement | null;
@@ -31,7 +31,7 @@ function renderTasks(tasks: TodoItem[]) {
     if (task) {
         const taskInput = document.getElementById('text-inp') as HTMLInputElement | null;
         if (taskInput) {
-            taskInput.value = task.task;  
+            taskInput.value = task.task.replace(/<\/?s>/g, '');  
         }
         editingItem = taskId; 
         toggleButtons(true);  
@@ -42,12 +42,29 @@ function renderTasks(tasks: TodoItem[]) {
 (window as any).deleteTask = function(taskId: number) {
     console.log('Deleting task:', taskId);
     let tasks: TodoItem[] = JSON.parse(localStorage.getItem('tasks') || '[]');
-    tasks = tasks.filter(task => task.id !== taskId); // Remove the task from the list
+    tasks = tasks.filter(task => task.id !== taskId); 
     localStorage.setItem('tasks', JSON.stringify(tasks));
     renderTasks(tasks); 
 };
 
-// Function to toggle buttons visibility
+(window as any).doneTask = function(taskId: number) {
+    let tasks: TodoItem[] = JSON.parse(localStorage.getItem('tasks') || '[]');
+
+
+    tasks = tasks.map(task => {
+        if (task.id === taskId) {
+            const isDone = task.task.startsWith('<s>') && task.task.endsWith('</s>');
+            const updatedTask = isDone ? task.task.replace(/<\/?s>/g, '') : `<s>${task.task}</s>`;
+            return { ...task, task: updatedTask }; 
+        }
+        return task; 
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks(tasks);
+};
+
+
 function toggleButtons(isEditing: boolean) {
     const addButton = document.getElementById('add-btn') as HTMLButtonElement | null;
     const updateButton = document.getElementById('edit-btn') as HTMLButtonElement | null;
@@ -79,7 +96,7 @@ function addTask(task: string) {
     const newTask: TodoItem = {
         id: Date.now(),
         task: task,
-        isCompleted: false,
+        
     };
     tasks.push(newTask);
     localStorage.setItem('tasks', JSON.stringify(tasks));
